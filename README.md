@@ -1,4 +1,4 @@
-# express-layout
+# express-layout [![Build Status](https://travis-ci.org/uber/express-layout.png?branch=master)](https://travis-ci.org/uber/express-layout)
 
 Adds layout support to Express
 
