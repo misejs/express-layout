@@ -12,7 +12,7 @@ describe('Express Layout', function () {
     before(function (done) {
       var that = this;
       this.app = express();
-      this.app.set('views', 'test/fixtures');
+      this.app.set('views', options.views || 'test/fixtures');
       this.app.set('view engine', 'jade');
       if (options.global) {
         var keys = Object.keys(options.global);
@@ -72,6 +72,16 @@ describe('Express Layout', function () {
     } });
     it('should use the options', function () {
       expect(this.body).to.eql('<div><h1>Hello World</h1></div>');
+    });
+  });
+
+  describe('when multiple views directories are defined',function(){
+    render('hello-world',{
+      views : ['test/fixtures','test/fixtures/otherlayouts'],
+      render : { layout : 'layout2' }
+    });
+    it('should find and properly render the new layout',function(){
+      expect(this.body).to.eql('<main><h1>Hello World</h1></main>');
     });
   });
 });
