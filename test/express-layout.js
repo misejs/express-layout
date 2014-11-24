@@ -84,4 +84,14 @@ describe('Express Layout', function () {
       expect(this.body).to.eql('<main><h1>Hello World</h1></main>');
     });
   });
+
+  describe('when multiple views directories are defined but a view is not in any of them',function(){
+    render('pork',{
+      views : ['test/fixtures','test/fixtures/otherlayouts'],
+      render : { layout : 'layout2' }
+    });
+    it('should return an error mentioning that the view is invalid',function(){
+      expect(this.body).to.match(/Error: Failed to lookup view &quot;pork&quot; in views directories : test\/fixtures,test\/fixtures\/otherlayouts/);
+    });
+  });
 });
